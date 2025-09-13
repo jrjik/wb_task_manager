@@ -9,20 +9,11 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
 import os
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-LOGIN_URL = '/users/login/'
-LOGIN_REDIRECT_URL = '/tasks/'
-LOGOUT_REDIRECT_URL = '/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -38,6 +29,10 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
+LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/tasks/'
+LOGOUT_REDIRECT_URL = '/'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,7 +43,6 @@ INSTALLED_APPS = [
     'bootstrap4',
     'users',
     'tasks',
-
 ]
 
 BOOTSTRAP4 = {
@@ -81,6 +75,23 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://wbtaskmanager-production.up.railway.app',
+    'https://*.railway.app',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
+
+CORS_ALLOWED_ORIGINS = [
+    "https://wbtaskmanager-production.up.railway.app",
+    "https://*.railway.app",
 ]
 
 WSGI_APPLICATION = 'task_manager.wsgi.application'
@@ -131,7 +142,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
