@@ -1,0 +1,33 @@
+{% extends "tasks/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Подтверждение удаления</h4>
+            </div>
+            <div class="card-body text-center">
+                <div class="alert alert-warning mb-4">
+                    <h5>Вы уверены, что хотите удалить задачу?</h5>
+                    <p class="mb-0"><strong>"{{ object }}"</strong></p>
+                    <small class="text-muted">Это действие нельзя отменить</small>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            <button type="submit" class="btn btn-danger me-md-2">
+                                🗑️ Да, удалить
+                            </button>
+                            <a href="{% url 'tasks:index' %}" class="btn btn-secondary">Отмена</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

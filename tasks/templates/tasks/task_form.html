@@ -1,0 +1,32 @@
+{% extends "tasks/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">
+                    {% if form.instance.pk %}Редактировать{% else %}Создать{% endif %} задачу
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="post" class="form">
+                    {% csrf_token %}
+
+                    {% bootstrap_form form %}
+
+                    <div class="form-group">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{% url 'tasks:index' %}" class="btn btn-secondary me-md-2">Отмена</a>
+                            <button type="submit" class="btn btn-primary">
+                                {% if form.instance.pk %}Обновить{% else %}Создать{% endif %}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
